@@ -9,7 +9,7 @@ namespace S4comms {
     let default_group = 23 
     let default_power = 7
     let student_id = 0xFF
-    let payloadInterval = 1000
+    let payloadInterval = 10000
     let intervalTime = input.runningTime()
 
     /**
@@ -25,12 +25,12 @@ namespace S4comms {
         data2 = Math.max(-32768, Math.min(32767, data2))
         data3 = Math.max(-32768, Math.min(32767, data3))
 
-        // all LE format for micro:bit compatibility
-        packet.setNumber(NumberFormat.UInt8LE, 0, id)
-        packet.setNumber(NumberFormat.Int8LE, 1, temp)
-        packet.setNumber(NumberFormat.Int16LE, 2, data1)
-        packet.setNumber(NumberFormat.Int16LE, 4, data2)
-        packet.setNumber(NumberFormat.Int16LE, 6, data3)
+        //
+        packet.setNumber(NumberFormat.UInt8BE, 0, id)
+        packet.setNumber(NumberFormat.Int8BE, 1, temp)
+        packet.setNumber(NumberFormat.Int16BE, 2, data1)
+        packet.setNumber(NumberFormat.Int16BE, 4, data2)
+        packet.setNumber(NumberFormat.Int16BE, 6, data3)
 
         return packet
     }
