@@ -6,6 +6,7 @@
 //% color="#4beb36"
 namespace S4comms {
     let default_channel = 23
+    let default_group = 0 
     let default_power = 7
     let student_id = 0xFF
     let payloadInterval = 10000
@@ -44,26 +45,26 @@ namespace S4comms {
         payloadInterval = frequency
         student_id = id
         radio.setTransmitPower(default_power)
+        radio.setGroup(default_group)
         radio.setFrequencyBand(default_channel)
         radio.on()
     }
 
     /**
      * Sends a downlink packet if enough time has passed
-     * @param id Payload identifier (0–255)
      * @param temp Temperature to include (-128 to 127)
      * @param data1 First data value, signed short
      * @param data2 Second data value, signed short
      * @param data3 Third data value, signed short
      */
-    //% block="request downlink with id $id temp $temp data1 $data1 data2 $data2 data3 $data3"
+    //% block="request downlink with temp $temp data1 $data1 data2 $data2 data3 $data3"
     //% weight=90
     //% group="Radio"
     //% inlineInputMode=inline
-    export function downlink(id: number, temp: number, data1: number, data2: number, data3: number) {
+    export function downlink(temp: number, data1: number, data2: number, data3: number) {
 
         if (input.runningTime() - intervalTime >= payloadInterval) {
-            let packet = constructPacket(id, temp, data1, data2, data3)
+            let packet = constructPacket(student_id, temp, data1, data2, data3)
             radio.sendBuffer(packet)
 
             intervalTime = input.runningTime()
