@@ -44,9 +44,17 @@ namespace S4comms {
     }
 
     /**
-     * This should be placed within your main loop
+     * Sends a downlink packet if enough time has passed
+     * @param id Packet identifier (0–255)
+     * @param temp Temperature to include (-128 to 127)
+     * @param data1 First data value, signed short
+     * @param data2 Second data value, signed short
+     * @param data3 Third data value, signed short
      */
-    //% block
+    //% block="request downlink with id $id temp $temp data1 $data1 data2 $data2 data3 $data3"
+    //% weight=90
+    //% group="Radio"
+    //% inlineInputMode=inline
     export function downlink(id: number, temp: number, data1: number, data2: number, data3: number) {
 
         if (input.runningTime() - intervalTime >= payloadInterval) {
