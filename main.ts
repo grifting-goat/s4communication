@@ -26,17 +26,16 @@ namespace S4comms {
 
 
         //single byte id and temp
-        packet.setNumber(NumberFormat.UInt8LE, 0, id)  // Byte 0
-        packet.setNumber(NumberFormat.Int8LE, 1, temp)        // Byte 1
+        packet.setNumber(NumberFormat.UInt8BE, 0, id)  // Byte 0
+        packet.setNumber(NumberFormat.Int8BE, 1, temp)        // Byte 1
 
         //3 2 byte shorts
-        packet.setNumber(NumberFormat.Int16LE, 2, data1)        // Byte 2-3
-        packet.setNumber(NumberFormat.Int16LE, 4, data2)        // Byte 4-5
-        packet.setNumber(NumberFormat.Int16LE, 6, data3)        // Byte 6-7
+        packet.setNumber(NumberFormat.Int16BE, 2, data1)        // Byte 2-3
+        packet.setNumber(NumberFormat.Int16BE, 4, data2)        // Byte 4-5
+        packet.setNumber(NumberFormat.Int16BE, 6, data3)        // Byte 6-7
 
         return packet
     }
-
 
     /**
      * This should be placed in the start up section
@@ -49,8 +48,8 @@ namespace S4comms {
     //% inlineInputMode=inline
     export function init(id : number, frequency : number) {
         payloadInterval = frequency
-        let intervalTime = input.runningTime()
-        id = Math.max(0, Math.min(255, id))
+        intervalTime = input.runningTime()
+        student_id = Math.max(0, Math.min(255, id))
         radio.setTransmitPower(default_power)
         radio.setGroup(default_group)
         radio.setFrequencyBand(default_channel)
