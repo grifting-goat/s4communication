@@ -19,6 +19,12 @@ namespace S4comms {
     function constructPacket(id: number, temp: number, data1: number, data2: number, data3: number): Buffer {
         let packet = pins.createBuffer(8)
 
+        temp = Math.max(-128, Math.min(127, temp))
+        data1 = Math.max(-32768, Math.min(32767, data1))
+        data2 = Math.max(-32768, Math.min(32767, data2))
+        data3 = Math.max(-32768, Math.min(32767, data3))
+
+
         //single byte id and temp
         packet.setNumber(NumberFormat.UInt8LE, 0, id)  // Byte 0
         packet.setNumber(NumberFormat.Int8LE, 1, temp)        // Byte 1
@@ -43,7 +49,8 @@ namespace S4comms {
     //% inlineInputMode=inline
     export function init(id : number, frequency : number) {
         payloadInterval = frequency
-        student_id = id
+        let intervalTime = input.runningTime()
+        id = Math.max(0, Math.min(255, id))
         radio.setTransmitPower(default_power)
         radio.setGroup(default_group)
         radio.setFrequencyBand(default_channel)
