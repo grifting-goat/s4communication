@@ -33,8 +33,13 @@ namespace S4comms {
 
     /**
      * This should be placed in the start up section
+     * @param id Payload identifier (0–255)
+     * @param frequency The number of milliseconds to wait before sending next packet
      */
-    //% block
+    //% block="init with id $id sending every $frequency ms"
+    //% weight=90
+    //% group="Radio"
+    //% inlineInputMode=inline
     export function init(id : number, frequency : number) {
         payloadInterval = frequency
         student_id = id
@@ -45,7 +50,7 @@ namespace S4comms {
 
     /**
      * Sends a downlink packet if enough time has passed
-     * @param id Packet identifier (0–255)
+     * @param id Payload identifier (0–255)
      * @param temp Temperature to include (-128 to 127)
      * @param data1 First data value, signed short
      * @param data2 Second data value, signed short
