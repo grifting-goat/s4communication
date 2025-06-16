@@ -46,13 +46,13 @@ namespace S4comms {
     //% group="Radio"
     //% inlineInputMode=inline
     export function init(id : number, frequency : number) {
-        radio.setTransmitSerialNumber(false)
         payloadInterval = frequency
         intervalTime = input.runningTime()
         student_id = Math.max(0, Math.min(255, id))
         radio.setTransmitPower(default_power)
         radio.setGroup(default_group)
         radio.setFrequencyBand(default_channel)
+        radio.setTransmitSerialNumber(false)
         radio.on()
     }
 
@@ -70,7 +70,7 @@ namespace S4comms {
     export function downlink(temp: number, data1: number, data2: number, data3: number) {
 
         if (input.runningTime() - intervalTime >= payloadInterval) {
-            let packet = constructPacket(student_id, temp, data1, data2, data3)
+            const packet = constructPacket(student_id, temp, data1, data2, data3)
             radio.sendBuffer(packet)
 
             intervalTime = input.runningTime()
