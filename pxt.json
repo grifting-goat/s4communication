@@ -4,7 +4,8 @@
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "S4communicaton - Copy": "github:grifting-goat/s4communication#master"
     },
     "files": [
         "main.ts",
