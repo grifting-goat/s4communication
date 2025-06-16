@@ -5,8 +5,8 @@
 
 //% color="#4beb36"
 namespace S4comms {
-    let default_channel = 23
-    let default_group = 0 
+    let default_channel = 7
+    let default_group = 23 
     let default_power = 7
     let student_id = 0xFF
     let payloadInterval = 10000
